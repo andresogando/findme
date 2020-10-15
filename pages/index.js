@@ -1,10 +1,10 @@
 /* src/App.js */
 import React, { useEffect, useState } from 'react'
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
-import { createTodo } from './graphql/mutations'
-import { listTodos } from './graphql/queries'
+import { createTodo } from '../src/graphql/mutations'
+import { listTodos } from '../src/graphql/queries'
 
-import awsExports from "./aws-exports";
+import awsExports from "../src/aws-exports";
 Amplify.configure(awsExports);
 
 const initialState = { name: '', description: '' }
