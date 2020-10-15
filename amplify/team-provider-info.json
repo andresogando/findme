@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-findme-dev-120646-authRole",
+      "UnauthRoleArn": "arn:aws:iam::852742705759:role/amplify-findme-dev-120646-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::852742705759:role/amplify-findme-dev-120646-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-findme-dev-120646-deployment",
+      "UnauthRoleName": "amplify-findme-dev-120646-unauthRole",
+      "StackName": "amplify-findme-dev-120646",
+      "StackId": "arn:aws:cloudformation:us-east-1:852742705759:stack/amplify-findme-dev-120646/6f2ba500-0f00-11eb-b8a8-120bf1e0775b",
+      "AmplifyAppId": "d1300peskafasd"
+    },
+    "categories": {
+      "auth": {
+        "findmedcb7b3be": {}
+      }
+    }
+  }
+}
