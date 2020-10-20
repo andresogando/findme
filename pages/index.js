@@ -3,7 +3,7 @@ import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
 import React, { useEffect, useState } from 'react';
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-
+import {Button, Container, Form, FormFile } from 'react-bootstrap'
 // unused import import SweetAlert from 'react-bootstrap-sweetalert';
 
 import { Amplify, API, Auth, withSSRContext, graphqlOperation, Storage, Analytics } from "aws-amplify";
@@ -89,27 +89,28 @@ function App() {
 
   return (
     <AmplifyAuthenticator>
-    <div style={styles.container}>
+      <Container> 
       <input
         type="file"
         onChange={handleChange}
         style={{margin: '10px 0px'}}
       />
 
-      
+
+
+
       <input
-        placeholder='Image'
-        value={productName}
-        onChange={e => updateProductName(e.target.value)}
-      />
+              placeholder='Image'
+              value={productName}
+              onChange={e => updateProductName(e.target.value)}
+            />
 
 
-      <button
-        style={styles.button}
-        onClick={createProduct}>
-          
-          Upload! Picture
-      </button>
+      <Button
+              onClick={createProduct}>
+                
+                Upload! Picture
+            </Button>
 
       {
         products.map((p, i) => (
@@ -120,33 +121,18 @@ function App() {
           />
         ))
       }
-    </div>
+    </Container>     
     </AmplifyAuthenticator>
   );
 }
 
 
 
-
-
-
-
-
 const styles = {
-  container: {
-    width: 400,
-    margin: '0 auto',
-  },
   image: {
-    width: 75
-  },
-  button: {
-    width: 200,
-    backgroundColor: '#ddd',
-    cursor: 'pointer',
-    height: 30,
-    margin: '0px 0px 8px'
+    width: 75, 
   }
 }
+
 
 export default App;
