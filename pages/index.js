@@ -97,7 +97,6 @@ function App() {
       />
 
       
-    <button onClick={ohghooh}></button>
       <input
         placeholder='Image'
         value={productName}
