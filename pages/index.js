@@ -82,16 +82,11 @@ function App() {
   }
 
   
-  const MoodButton = ({ rating, onClick }) => (
-    <button 
-      data-rating={rating}
-      className="mood-btn" 
-      onClick={() => onClick(rating)}
-    />
-  )
+ 
 
 
   return (
+    <AmplifyAuthenticator>
     <div style={styles.container}>
       <input
         type="file"
@@ -126,6 +121,7 @@ function App() {
         ))
       }
     </div>
+    </AmplifyAuthenticator>
   );
 }
 
