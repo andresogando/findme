@@ -86,6 +86,7 @@ function App() {
 
 
   return (
+    <Sentry.ErrorBoundary fallback={"An error has ocurred"}> 
     <AmplifyAuthenticator>
     <div style={styles.container}>
       <input
@@ -103,7 +104,7 @@ function App() {
       />
 
 
-
+       <button onClick={methodDoesNotExist}>Break the world</button>;
       <button
         style={styles.button}
         onClick={createProduct}>
@@ -122,6 +123,7 @@ function App() {
       }
     </div>
     </AmplifyAuthenticator>
+    </Sentry.ErrorBoundary>
   );
 }
 
