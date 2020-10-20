@@ -82,7 +82,14 @@ function App() {
   }
 
   
-  
+  const MoodButton = ({ rating, onClick }) => (
+    <button 
+      data-rating={rating}
+      className="mood-btn" 
+      onClick={() => onClick(rating)}
+    />
+  )
+
 
   return (
     <div style={styles.container}>
@@ -91,6 +98,8 @@ function App() {
         onChange={handleChange}
         style={{margin: '10px 0px'}}
       />
+
+      <MoodButton onClick={onPick}> </MoodButton>
 
       <input
         placeholder='Image'
