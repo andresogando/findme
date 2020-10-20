@@ -14,7 +14,7 @@ import { listProducts as ListProducts } from "../src/graphql/queries";
 import { v4 as uuid } from 'uuid'
 
 
-
+Analytics.record('Eventos');
 
 Amplify.configure({ ...awsExports, ssr: true });
 import config from '../src/aws-exports'
