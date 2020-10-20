@@ -99,8 +99,7 @@ function App() {
         style={{margin: '10px 0px'}}
       />
 
-      <MoodButton onClick={onPick}> </MoodButton>
-      <MoodButton onClick={onPick}> holaaa </MoodButton>
+      
 
       <input
         placeholder='Image'
