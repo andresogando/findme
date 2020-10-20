@@ -1,81 +1,147 @@
-/* src/App.js */
-import React, { useEffect, useState } from 'react'
-import Amplify, { API, graphqlOperation } from 'aws-amplify'
-import { createTodo } from '../src/graphql/mutations'
-import { listTodos } from '../src/graphql/queries'
+// pages/index.js
+import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
+import React, { useEffect, useState } from 'react';
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 
+// unused import import SweetAlert from 'react-bootstrap-sweetalert';
+
+import { Amplify, API, Auth, withSSRContext, graphqlOperation, Storage } from "aws-amplify";
+// will use later import Head from "next/head";
 import awsExports from "../src/aws-exports";
-Amplify.configure(awsExports);
+import { createProduct as CreateProduct } from "../src/graphql/mutations";
+import { listProducts as ListProducts } from "../src/graphql/queries";
+import { v4 as uuid } from 'uuid'
 
-const initialState = { name: '', description: '' }
 
-const App = () => {
-  const [formState, setFormState] = useState(initialState)
-  const [todos, setTodos] = useState([])
 
+
+Amplify.configure({ ...awsExports, ssr: true });
+import config from '../src/aws-exports'
+
+const {
+  aws_user_files_s3_bucket_region: region,
+  aws_user_files_s3_bucket: bucket
+} = config
+ 
+Sentry.init({
+  dsn: "https://ca07aec136804065bfae72e2593bf55f@o431905.ingest.sentry.io/5472399",
+  integrations: [
+    new Integrations.BrowserTracing(),
+  ],
+
+  // We recommend adjusting this value in production, or using tracesSampler
+  // for finer control
+  tracesSampleRate: 1.0,
+});
+ 
+
+function App() {
+  const [file, updateFile] = useState(null)
+  const [productName, updateProductName] = useState('')
+  const [products, updateProducts] = useState([])
   useEffect(() => {
-    fetchTodos()
+    listProducts()
   }, [])
 
-  function setInput(key, value) {
-    setFormState({ ...formState, [key]: value })
+  // Query the API and save them to the state
+  async function listProducts() {
+    const products = await API.graphql(graphqlOperation(ListProducts))
+    updateProducts(products.data.listProducts.items)
   }
 
-  async function fetchTodos() {
-    try {
-      const todoData = await API.graphql(graphqlOperation(listTodos))
-      const todos = todoData.data.listTodos.items
-      setTodos(todos)
-    } catch (err) { console.log('error fetching todos') }
+  function handleChange(event) {
+    const { target: { value, files } } = event
+    const fileForUpload = files[0]
+    updateProductName(fileForUpload.name.split(".")[0])
+    updateFile(fileForUpload || value)
   }
 
-  async function addTodo() {
-    try {
-      if (!formState.name || !formState.description) return
-      const todo = { ...formState }
-      setTodos([...todos, todo])
-      setFormState(initialState)
-      await API.graphql(graphqlOperation(createTodo, {input: todo}))
-    } catch (err) {
-      console.log('error creating todo:', err)
+  
+
+  // upload the image to S3 and then save it in the GraphQL API
+  async function createProduct() {
+    if (file) {
+      const extension = file.name.split(".")[1]
+      const { type: mimeType } = file
+      const key = `images/${uuid()}${productName}.${extension}`      
+      const url = `https://${bucket}.s3.amazonaws.com/public/${key}`
+      const inputData = { name: productName , image: url }
+      // s3://findme120646-dev/public/images/70cf6141-39a8-4977-bb11-a9dbbfa1d4caPresident-Trump-Official-Portrait-200x200.jpg
+      // https://findme120646-dev.s3.amazonaws.com/public/images/70cf6141-39a8-4977-bb11-a9dbbfa1d4caPresident-Trump-Official-Portrait-200x200.jpg
+      //       const url = `https://${bucket}.s3.${region}.amazonaws.com/public/${key}` ORIGINAL 
+      try {
+        await Storage.put(key, file, {
+          contentType: mimeType
+        })
+        await API.graphql(graphqlOperation(CreateProduct, { input: inputData }))
+      } catch (err) {
+        console.log('error: ', err)
+      }
     }
   }
 
+  
+  
+
   return (
     <div style={styles.container}>
-      <h2>Amplify Todos</h2>
       <input
-        onChange={event => setInput('name', event.target.value)}
-        style={styles.input}
-        value={formState.name} 
-        placeholder="Name"
+        type="file"
+        onChange={handleChange}
+        style={{margin: '10px 0px'}}
       />
+
       <input
-        onChange={event => setInput('description', event.target.value)}
-        style={styles.input}
-        value={formState.description}
-        placeholder="Description"
+        placeholder='Image'
+        value={productName}
+        onChange={e => updateProductName(e.target.value)}
       />
-      <button style={styles.button} onClick={addTodo}>Create Todo</button>
+
+
+
+      <button
+        style={styles.button}
+        onClick={createProduct}>
+          
+          Upload Picture
+      </button>
+
       {
-        todos.map((todo, index) => (
-          <div key={todo.id ? todo.id : index} style={styles.todo}>
-            <p style={styles.todoName}>{todo.name}</p>
-            <p style={styles.todoDescription}>{todo.description}</p>
-          </div>
+        products.map((p, i) => (
+          <img
+            style={styles.image}
+            key={i}
+            src={p.image}
+          />
         ))
       }
     </div>
-  )
+  );
 }
+
+
+
+
+
+
+
 
 const styles = {
-  container: { width: 400, margin: '0 auto', display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'center', padding: 20 },
-  todo: {  marginBottom: 15 },
-  input: { border: 'none', backgroundColor: '#ddd', marginBottom: 10, padding: 8, fontSize: 18 },
-  todoName: { fontSize: 20, fontWeight: 'bold' },
-  todoDescription: { marginBottom: 0 },
-  button: { backgroundColor: 'black', color: 'white', outline: 'none', fontSize: 18, padding: '12px 0px' }
+  container: {
+    width: 400,
+    margin: '0 auto',
+  },
+  image: {
+    width: 75
+  },
+  button: {
+    width: 200,
+    backgroundColor: '#ddd',
+    cursor: 'pointer',
+    height: 30,
+    margin: '0px 0px 8px'
+  }
 }
 
-export default App
+export default App;

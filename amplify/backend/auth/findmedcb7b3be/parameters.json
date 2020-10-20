@@ -1,6 +1,6 @@
 {
     "identityPoolName": "findmedcb7b3be_identitypool_dcb7b3be",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "findmedcb7b3be",
     "userPoolName": "findmedcb7b3be_userpool_dcb7b3be",
     "autoVerifiedAttributes": [

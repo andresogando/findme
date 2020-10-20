@@ -31,5 +31,11 @@
         }
       }
     }
+  },
+  "storage": {
+    "findme": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

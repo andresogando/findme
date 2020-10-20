@@ -30,6 +30,3 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 
-Executing command: npm ci
-2020-10-15T16:24:02.865Z [INFO]: > @ampproject/toolbox-optimizer@2.6.0 postinstall /codebuild/output/src181527449/src/findme/node_modules/@ampproject/toolbox-optimizer
-                                 > node lib/warmup.js

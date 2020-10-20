@@ -8,8 +8,16 @@
     "start": "next start"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^0.2.23",
+    "@sentry/react": "^5.26.0",
+    "@sentry/tracing": "^5.26.0",
+    "@sweetalert/with-react": "^0.1.1",
+    "aws-amplify": "^3.3.3",
     "next": "9.5.5",
     "react": "16.14.0",
-    "react-dom": "16.14.0"
+    "react-bootstrap-sweetalert": "^5.2.0",
+    "react-dom": "16.14.0",
+    "sweetalert": "^2.1.2",
+    "uuid": "^8.3.1"
   }
 }
