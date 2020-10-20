@@ -104,7 +104,6 @@ function App() {
       />
 
 
-       <button onClick={methodDoesNotExist}>Break the world</button>;
       <button
         style={styles.button}
         onClick={createProduct}>
