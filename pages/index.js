@@ -29,7 +29,9 @@ Sentry.init({
   integrations: [
     new Integrations.BrowserTracing(),
   ],
-
+  beforeBreadcrumb(breadcrumb, hint) {
+    return breadcrumb.category === "ui.click" ? null : breadcrumb;
+  },
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
   tracesSampleRate: 1.0,
@@ -86,7 +88,6 @@ function App() {
 
 
   return (
-    <Sentry.ErrorBoundary fallback={"An error has ocurred"}> 
     <AmplifyAuthenticator>
     <div style={styles.container}>
       <input
@@ -96,7 +97,7 @@ function App() {
       />
 
       
-
+    <button onClick={ohghooh}></button>
       <input
         placeholder='Image'
         value={productName}
@@ -122,7 +123,6 @@ function App() {
       }
     </div>
     </AmplifyAuthenticator>
-    </Sentry.ErrorBoundary>
   );
 }
 
