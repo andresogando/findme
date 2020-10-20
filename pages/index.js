@@ -6,7 +6,7 @@ import { Integrations } from "@sentry/tracing";
 
 // unused import import SweetAlert from 'react-bootstrap-sweetalert';
 
-import { Amplify, API, Auth, withSSRContext, graphqlOperation, Storage } from "aws-amplify";
+import { Amplify, API, Auth, withSSRContext, graphqlOperation, Storage, Analytics } from "aws-amplify";
 // will use later import Head from "next/head";
 import awsExports from "../src/aws-exports";
 import { createProduct as CreateProduct } from "../src/graphql/mutations";
