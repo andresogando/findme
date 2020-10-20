@@ -100,6 +100,7 @@ function App() {
       />
 
       <MoodButton onClick={onPick}> </MoodButton>
+      <MoodButton onClick={onPick}> holaaa </MoodButton>
 
       <input
         placeholder='Image'
