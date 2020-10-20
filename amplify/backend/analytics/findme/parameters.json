@@ -1,0 +1,21 @@
+{
+    "appName": "findme",
+    "roleName": "pinpointLambdaRole84c2d68c",
+    "cloudformationPolicyName": "cloudformationPolicy84c2d68c",
+    "cloudWatchPolicyName": "cloudWatchPolicy84c2d68c",
+    "pinpointPolicyName": "pinpointPolicy84c2d68c",
+    "authPolicyName": "pinpoint_amplify_84c2d68c",
+    "unauthPolicyName": "pinpoint_amplify_84c2d68c",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}
