@@ -6,20 +6,22 @@ import { Integrations } from "@sentry/tracing";
 import { Amplify, Analytics } from "aws-amplify";
 // will use later import Head from "next/head";
 import awsExports from "../src/aws-exports";
+import Layout from "../components/layout";
+import Showroom from "../components/showroom";
+
 
 
 Analytics.record('Eventos');
 
 Amplify.configure({ ...awsExports, ssr: true });
-import Layout from "../components/layout";
-import Showroom from "../components/showroom";
+
 
 
 Sentry.init({
   dsn: "https://ca07aec136804065bfae72e2593bf55f@o431905.ingest.sentry.io/5472399",
   integrations: [
-    new Integrations.BrowserTracing(),
-  ],
+    new Integrations.BrowserTracing()],
+   // Event Tracker 
   beforeBreadcrumb(breadcrumb, hint) {
     return breadcrumb.category === "ui.click" ? null : breadcrumb;
   },
@@ -49,4 +51,4 @@ function App() {
 
 
 
-export default App;
+export default Sentry.withProfiler(App);
