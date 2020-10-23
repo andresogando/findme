@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 
+
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
@@ -103,7 +104,7 @@ export default function Header(props) {
         </Button>
       </Toolbar>
         <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-       
+         
           <Link
             color="inherit"
             noWrap
@@ -111,6 +112,7 @@ export default function Header(props) {
             className={classes.toolbarLink}>
                 <div onClick={() => setModalShow(true)}> Missing/Kidnappings Persons? </div>
             </Link>
+
             <Link
             color="inherit"
             noWrap

@@ -1,5 +1,6 @@
-import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
 import React from 'react';
+import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
+
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 // unused import import SweetAlert from 'react-bootstrap-sweetalert';
@@ -37,15 +38,15 @@ function App() {
 
   return (
     <Container fluid='md'>
-         <Layout>
-          <AmplifyAuthenticator>
-              <Jumbotron>
-                <h3>  🚧     Site under construction   🚧 </h3>
-              </Jumbotron>
-              <Showroom  />
-
-          </AmplifyAuthenticator>
-          </Layout>
+      <AmplifyAuthenticator>
+          <Layout>
+            
+            <Jumbotron>
+              <h3>  🚧     Site under construction   🚧 </h3>
+            </Jumbotron>
+            <Showroom  />
+        </Layout>
+      </AmplifyAuthenticator>
     </Container>
    
  );
