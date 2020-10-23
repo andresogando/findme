@@ -8,15 +8,16 @@ import { Amplify, Analytics } from "aws-amplify";
 import awsExports from "../src/aws-exports";
 import Layout from "../components/layout";
 import Showroom from "../components/showroom";
+import Uploader from "../components/uploader";
+import {Container, Jumbotron} from 'react-bootstrap';
 
 
-
+//Amplify Utilities 
 Analytics.record('Eventos');
-
 Amplify.configure({ ...awsExports, ssr: true });
 
 
-
+//Sentry Error Tracker Utilities
 Sentry.init({
   dsn: "https://ca07aec136804065bfae72e2593bf55f@o431905.ingest.sentry.io/5472399",
   integrations: [
@@ -29,23 +30,24 @@ Sentry.init({
   // for finer control
   tracesSampleRate: 1.0,
 });
- 
+
 
 function App() {
+  
 
   return (
-    <Layout>
-      <AmplifyAuthenticator>
+    <Container fluid='md'>
+         <Layout>
+          <AmplifyAuthenticator>
+              <Jumbotron>
+                <h3> hooooolaaaa</h3>
+              </Jumbotron>
+              <Showroom  />
 
-      <div>
-          <h3> HOLA </h3>
-          <hr />
-      </div>
-      
-    <Showroom   />
-
-    </AmplifyAuthenticator>
-    </Layout>
+          </AmplifyAuthenticator>
+          </Layout>
+    </Container>
+   
  );
 };
 

@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { API, graphqlOperation } from "aws-amplify";
 import GridList from '@material-ui/core/GridList';
 import { makeStyles } from '@material-ui/core/styles';
-import GridListTile from '@material-ui/core/GridListTile';
-import ListSubheader from '@material-ui/core/ListSubheader';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,15 +42,15 @@ export default function Showroom(){
       }
 
     return(
-       <GridList  cols={5} cellHeight={180} pacing={15} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={4} style={{ height: 'auto' }}>
-          <ListSubheader component="div"></ListSubheader>
-        </GridListTile>
+      <div>
+        <GridList  cols={5} cellHeight={180} pacing={15} className={classes.gridList}>
         {
           products.map((p, i) => (
           <img key={i} src={p.image}  /> ))
         }
         </GridList>
+      </div>
+       
     )
   }
 

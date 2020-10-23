@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { createProduct as CreateProduct } from "../src/graphql/mutations";
 import { v4 as uuid } from 'uuid'
 import {  API, graphqlOperation, Storage } from "aws-amplify";
+import {Button,Form} from 'react-bootstrap';
+
 
 
 
@@ -20,7 +22,7 @@ export default function Uploader(){
     const [productName, updateProductName] = useState('')
     
   
-    function handleChange(event) {
+    function handleChange() {
       const { target: { value, files } } = event
       const fileForUpload = files[0]
       updateProductName(fileForUpload.name.split(".")[0])
@@ -45,6 +47,7 @@ export default function Uploader(){
         try {
           await Storage.put(key, file, {
             contentType: mimeType
+            
           })
           await API.graphql(graphqlOperation(CreateProduct, { input: inputData }))
         } catch (err) {
@@ -58,29 +61,38 @@ export default function Uploader(){
 
 
     return(
-
-      
          <div>
-             <input
-                type="file"
-                onChange={handleChange}
-                style={{margin: '10px 0px'}}
-            />
+          <hr/>
 
-            <input
-              placeholder='Image'
-              value={productName}
-              onChange={e => updateProductName(e.target.value)}
-            />
+          <Form >
+            <Form.Group>
+              <Form.File custom id="exampleFormControlFile1"   label={productName} onChange={handleChange}/>
+            </Form.Group>
+          </Form>        
+          <Button  type="submit" onClick={createProduct} variant="outline-primary" >Upload</Button>
 
-
-             <Button
-              onClick={createProduct}>
-                
-                Upload! Picture
-            </Button>
             <hr/>
+
         </div>
-    
-   )
+        
+      )
 }
+
+
+
+/**
+ *  <input
+                  type="file"
+                  onChange={handleChange}
+                  style={{margin: '10px 0px'}}
+              />
+
+              <Button
+                onClick={createProduct}>
+                  
+                  Upload! Picture
+              </Button>   
+ */
+
+
+
