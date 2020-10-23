@@ -40,7 +40,7 @@ function App() {
          <Layout>
           <AmplifyAuthenticator>
               <Jumbotron>
-                <h3> hooooolaaaa</h3>
+                <h3>  🚧     Site under construction   🚧 </h3>
               </Jumbotron>
               <Showroom  />
 
