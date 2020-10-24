@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import  {Modal, Form, Button} from 'react-bootstrap';
 
+import Upload from "./uploader"
 
 function MyVerticallyCenteredModal(props) {
     return (
@@ -38,12 +39,10 @@ function MyVerticallyCenteredModal(props) {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
+          <Form.Group controlId="formBasicUpload">
+            <Form.Label>Upload a Photo</Form.Label>
+            <Upload />
           </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
         </Form>
         </Modal.Body>
         <Modal.Footer>

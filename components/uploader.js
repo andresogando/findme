@@ -3,10 +3,6 @@ import { createProduct as CreateProduct } from "../src/graphql/mutations";
 import { v4 as uuid } from 'uuid'
 import {  API, graphqlOperation, Storage } from "aws-amplify";
 import {Button,Form} from 'react-bootstrap';
-
-
-
-
 import config from '../src/aws-exports'
 
 
