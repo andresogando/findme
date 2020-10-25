@@ -54,8 +54,6 @@ export default function Uploader(){
 
 
 
-
-
     return(
          <div>
           <hr/>

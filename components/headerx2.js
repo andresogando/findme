@@ -34,11 +34,6 @@ function MyVerticallyCenteredModal(props) {
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
-
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
           <Form.Group controlId="formBasicUpload">
             <Form.Label>Upload a Photo</Form.Label>
             <Upload />
