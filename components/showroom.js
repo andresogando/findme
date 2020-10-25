@@ -5,7 +5,7 @@ import GridList from '@material-ui/core/GridList';
 import { makeStyles } from '@material-ui/core/styles';
 import  {Modal, Form, Button} from 'react-bootstrap';
 
-
+let name;
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal
@@ -23,16 +23,8 @@ function MyVerticallyCenteredModal(props) {
       <Form>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Nombre de la persona</Form.Label>
-          <Form.Control type="text" />
-        </Form.Group>
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Edad</Form.Label>
-          <Form.Control type="number" />
-        </Form.Group>
-        <Form.Group controlId="formBasicDescripcion">
-          <Form.Label>Descripcion</Form.Label>
-          <Form.Control type="text" />
-        </Form.Group>
+          <Form.Control type="text"  readOnly placeholder={props.img_name}/>
+        </Form.Group> 
       </Form>
       </Modal.Body>
       <Modal.Footer>
@@ -68,6 +60,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Showroom(){
+
+  function imgFunction(boll,imgName){
+    setModalShow(boll)
+    name = imgName
+  }
     const [modalShow, setModalShow] = React.useState(false);
     const classes = useStyles();
 
@@ -81,17 +78,21 @@ export default function Showroom(){
         updateProducts(products.data.listProducts.items)
       }
 
+
     return(
       <div>
         <GridList  cols={5} cellHeight={180} pacing={15} className={classes.gridList}>
         {
           products.map((p, i) => (
-          <img key={i} src={p.image} onClick={() => setModalShow(true)}  /> ))
+          <img key={i} src={p.image} onClick={() => imgFunction(true,p.name)}   />
+          ))
+          
         }
         </GridList>
         <MyVerticallyCenteredModal
             show={modalShow}
             onHide={() => setModalShow(false)}
+            img_name = {name}
         />
       </div>
        
