@@ -3,7 +3,44 @@ import React, { useEffect, useState } from 'react';
 import { API, graphqlOperation } from "aws-amplify";
 import GridList from '@material-ui/core/GridList';
 import { makeStyles } from '@material-ui/core/styles';
+import  {Modal, Form, Button} from 'react-bootstrap';
 
+
+function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Persona Desaparecida
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+      <Form>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Nombre de la persona</Form.Label>
+          <Form.Control type="text" />
+        </Form.Group>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Edad</Form.Label>
+          <Form.Control type="number" />
+        </Form.Group>
+        <Form.Group controlId="formBasicDescripcion">
+          <Form.Label>Descripcion</Form.Label>
+          <Form.Control type="text" />
+        </Form.Group>
+      </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +65,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
+
 export default function Showroom(){
+    const [modalShow, setModalShow] = React.useState(false);
     const classes = useStyles();
 
     const [products, updateProducts] = useState([])
@@ -46,9 +86,13 @@ export default function Showroom(){
         <GridList  cols={5} cellHeight={180} pacing={15} className={classes.gridList}>
         {
           products.map((p, i) => (
-          <img key={i} src={p.image}  /> ))
+          <img key={i} src={p.image} onClick={() => setModalShow(true)}  /> ))
         }
         </GridList>
+        <MyVerticallyCenteredModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+        />
       </div>
        
     )
