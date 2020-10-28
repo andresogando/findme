@@ -9,7 +9,6 @@ import { Amplify, Analytics } from "aws-amplify";
 import awsExports from "../src/aws-exports";
 import Layout from "../components/layout";
 import Showroom from "../components/showroom";
-import Uploader from "../components/uploader";
 import {Container, Jumbotron} from 'react-bootstrap';
 
 
@@ -40,7 +39,6 @@ function App() {
     <Container fluid='md'>
       <AmplifyAuthenticator>
           <Layout>
-            
             <Jumbotron>
               <h3>  🚧     Site under construction   🚧 </h3>
             </Jumbotron>
