@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { createProduct as CreateProduct } from "../src/graphql/mutations";
 import { v4 as uuid } from 'uuid'
 import {  API, graphqlOperation, Storage } from "aws-amplify";
-import {Button,Form} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import config from '../src/aws-exports'
-
 
 const {
     aws_user_files_s3_bucket: bucket
@@ -35,8 +34,8 @@ export default function Uploader(){
       if (file) {
         const extension = file.name.split(".")[1]
         const { type: mimeType } = file
-        const key = `images/${uuid()}${productName}.${extension}`      
-        const url = `https://${bucket}.s3.amazonaws.com/public/${key}`
+        const key = `${productName}.${extension}`      
+        const url = `https://${bucket}.s3.amazonaws.com/${key}`
         const inputData = { name: productName , image: url }
         // s3://findme120646-dev/public/images/70cf6141-39a8-4977-bb11-a9dbbfa1d4caPresident-Trump-Official-Portrait-200x200.jpg
         // https://findme120646-dev.s3.amazonaws.com/public/images/70cf6141-39a8-4977-bb11-a9dbbfa1d4caPresident-Trump-Official-Portrait-200x200.jpg
@@ -47,26 +46,28 @@ export default function Uploader(){
             
           })
           await API.graphql(graphqlOperation(CreateProduct, { input: inputData }))
+          
         } catch (err) {
           console.log('error: ', err)
         }
       }
     }
-
-
-
-
-
+    
     return(
          <div>
           <hr/>
+       
+        <input
+                  type="file"
+                  onChange={handleChange}
+                  style={{margin: '10px 0px'}}
+              />
 
-          <Form >
-            <Form.Group>
-              <Form.File custom id="exampleFormControlFile1"   label={productName} onChange={handleChange}/>
-            </Form.Group>
-          </Form>        
-          <Button  type="submit" onClick={createProduct} variant="outline-primary" >Upload</Button>
+              <Button 
+              onClick={createProduct}>
+                  Upload! Picture
+
+              </Button>    
 
             <hr/>
 
@@ -74,22 +75,5 @@ export default function Uploader(){
         
       )
 }
-
-
-
-/**
- *  <input
-                  type="file"
-                  onChange={handleChange}
-                  style={{margin: '10px 0px'}}
-              />
-
-              <Button
-                onClick={createProduct}>
-                  
-                  Upload! Picture
-              </Button>   
- */
-
 
 

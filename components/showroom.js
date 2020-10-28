@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import  {Modal, Form, Button} from 'react-bootstrap';
 
 
+
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal
@@ -15,8 +16,9 @@ function MyVerticallyCenteredModal(props) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Persona Desaparecida
+        <Modal.Title  id="contained-modal-title-vcenter">
+          
+             
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -43,6 +45,7 @@ function MyVerticallyCenteredModal(props) {
 }
 
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -67,9 +70,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function Showroom(){
+export default function Showroom(props){
     const [modalShow, setModalShow] = React.useState(false);
     const classes = useStyles();
+
 
     const [products, updateProducts] = useState([])
     useEffect(() => {
@@ -79,24 +83,31 @@ export default function Showroom(){
     async function listProducts() {
         const products = await API.graphql(graphqlOperation(ListProducts))
         updateProducts(products.data.listProducts.items)
+        console.log(products)
+
       }
+
+      
+      
 
     return(
       <div>
         <GridList  cols={5} cellHeight={180} pacing={15} className={classes.gridList}>
         {
           products.map((p, i) => (
-          <img key={i} src={p.image} onClick={() => setModalShow(true)}  /> ))
+          <img key={i} src={p.image}   onClick={() => setModalShow(true)} />))
         }
         </GridList>
         <MyVerticallyCenteredModal
+        
+            
             show={modalShow}
             onHide={() => setModalShow(false)}
+           
         />
       </div>
        
     )
   }
-
 
 
