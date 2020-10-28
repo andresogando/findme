@@ -36,7 +36,7 @@ function App() {
   
 
   return (
-    <Container fluid='md'>
+    <Container fluid>
       <AmplifyAuthenticator>
           <Layout>
             <Jumbotron>
