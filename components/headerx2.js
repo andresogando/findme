@@ -46,7 +46,7 @@ export default function Header(props) {
           noWrap
           className={classes.toolbarTitle}
         >
-         Andres
+         Find Me
         </Typography>
         <IconButton>
           <SearchIcon />

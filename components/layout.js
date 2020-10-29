@@ -10,7 +10,7 @@ import {Container} from 'react-bootstrap';
 export default function Layout({children}) {
     return(
         <>
-        <Container fluid="sm">
+        <Container fluid="md">
 
         <div className='layout__main'>
             <Meta />
